@@ -46,6 +46,14 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>cleone.net.repo</id>
+			<name>Temporary FrontlineSMS repository on cleone.net</name>
+			<url>ftp://m2repo.cleone.net</url>
+		</repository>
+	</distributionManagement>
   
 	<build>
 		<plugins>
