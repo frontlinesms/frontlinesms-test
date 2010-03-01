@@ -13,6 +13,8 @@ import junit.framework.AssertionFailedError;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 
+import static org.mockito.Mockito.*;
+
 /**
  * Extension of basic junit {@link TestCase} to add extra functionality, such as deep array comparison.
  * @author Alex
@@ -51,7 +53,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected void assertEquals(byte[] expected, byte[] actual) {
+	protected static void assertEquals(byte[] expected, byte[] actual) {
 		assertEqualsWithoutMessage();
 	}
 	
@@ -61,7 +63,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected void assertEquals(String message, byte[] expected, byte[] actual) {
+	protected static void assertEquals(String message, byte[] expected, byte[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
@@ -74,7 +76,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected void assertEquals(String message, Object[] expected, Object[] actual) {
+	protected static void assertEquals(String message, Object[] expected, Object[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
@@ -88,7 +90,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected
 	 * @param actual
 	 */
-	protected void myAssertEquals(String message, String expected, String actual) {
+	protected static void myAssertEquals(String message, String expected, String actual) {
 		try {
 			assertEquals(message, expected, actual);
 		} catch(AssertionFailedError f) {
@@ -107,7 +109,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected
 	 * @param actual
 	 */
-	protected void assertEquals(String message, Date expected, Date actual) {
+	protected static void assertEquals(String message, Date expected, Date actual) {
 		assertEquals(message, expected.getTime(), actual.getTime());	
 	}
 	
@@ -116,7 +118,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected Stream of expected values
 	 * @param actual Stream of actual values
 	 */
-	protected void assertEquals(InputStream expected, InputStream actual) {
+	protected static void assertEquals(InputStream expected, InputStream actual) {
 		assertEqualsWithoutMessage();
 	}
 	
@@ -126,7 +128,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected Stream of expected values
 	 * @param actual Stream of actual values
 	 */
-	protected void assertEquals(String message, InputStream expected, InputStream actual) {
+	protected static void assertEquals(String message, InputStream expected, InputStream actual) {
 		ByteArrayOutputStream expectedAsBAOS = new ByteArrayOutputStream();
 		stream2stream(expected, expectedAsBAOS);
 
@@ -135,6 +137,24 @@ public abstract class BaseTestCase extends TestCase {
 		
 		assertEquals(message, expectedAsBAOS.toByteArray(), actualAsBAOS.toByteArray());
 	}
+
+	protected static void assertEqualsHashcodeTrue(Object a, Object b) {
+		assert(a != null) : "You must provide at least one non-null object to this method.";
+		assertTrue(a.equals(b));
+		if(b != null) {
+			assertTrue(b.equals(a));
+			assertTrue(a.hashCode() == b.hashCode());
+		}
+	}
+	
+	protected static void assertEqualsHashcodeFalse(Object a, Object b) {
+		assert(a != null) : "You must provide at least one non-null object to this method.";
+		assertFalse(a.equals(b));
+		if(b != null) {
+			assertFalse(b.equals(a));
+			assertFalse(a.hashCode() == b.hashCode());
+		}
+	}
 	
 //> STATIC UTILITIES
 	/**
@@ -142,7 +162,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param fileName The name of the test output file.
 	 * @return A temporary file in the temporary directory.
 	 */
-	protected File getOutputFile(String fileName) {
+	protected static File getOutputFile(String fileName) {
 		return new File(TEMPORARY_DATA_DIRECTORY, fileName);
 	}
 	
