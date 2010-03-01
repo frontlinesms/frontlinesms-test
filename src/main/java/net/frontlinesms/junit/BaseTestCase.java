@@ -13,8 +13,6 @@ import junit.framework.AssertionFailedError;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 
-import static org.mockito.Mockito.*;
-
 /**
  * Extension of basic junit {@link TestCase} to add extra functionality, such as deep array comparison.
  * @author Alex
