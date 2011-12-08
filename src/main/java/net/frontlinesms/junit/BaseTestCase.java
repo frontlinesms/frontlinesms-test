@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -43,6 +44,17 @@ public abstract class BaseTestCase extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		TEMPORARY_DATA_DIRECTORY.delete();
+	}
+	
+//> INJECTION METHODS
+	protected void inject(Object object, String fieldName, Object value) {
+		try {
+			Field f = object.getClass().getDeclaredField(fieldName);
+			f.setAccessible(true);
+			f.set(object, value);
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
 	}
 	
 //> EQUALS METHODS
@@ -151,6 +163,12 @@ public abstract class BaseTestCase extends TestCase {
 		if(b != null) {
 			assertFalse(b.equals(a));
 			assertFalse(a.hashCode() == b.hashCode());
+		}
+	}
+	
+	protected static void assertInstanceOf(String message, Class c, Object o) {
+		if(!c.isInstance(o)) {
+			fail(message = "\r\nExpected " + c + " but got " + o.getClass());
 		}
 	}
 	
