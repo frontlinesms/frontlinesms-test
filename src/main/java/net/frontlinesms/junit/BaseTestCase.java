@@ -166,9 +166,12 @@ public abstract class BaseTestCase extends TestCase {
 		}
 	}
 	
-	protected static void assertInstanceOf(String message, Class c, Object o) {
+	protected static void assertInstanceOf(String message, Class<?> c, Object o) {
+		if(o == null) {
+			fail(message + "\r\nExpected " + c + " but object was null.");
+		}
 		if(!c.isInstance(o)) {
-			fail(message = "\r\nExpected " + c + " but got " + o.getClass());
+			fail(message + "\r\nExpected " + c + " but got " + o.getClass());
 		}
 	}
 	
