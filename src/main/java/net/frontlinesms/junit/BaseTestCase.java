@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,8 @@ import junit.framework.TestCase;
 public abstract class BaseTestCase extends TestCase {
 	
 //> STATIC CONSTANTS
+	/** Date format for formatting messages. */
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM yyyy HH:mm:ss ZZZZZ");
 	/** The name of the directory to store temporary test files in */
 	private static final File TEMPORARY_DATA_DIRECTORY = new File("test_temp");
 	
@@ -146,6 +149,25 @@ public abstract class BaseTestCase extends TestCase {
 		stream2stream(actual, actualAsBAOS);
 		
 		assertEquals(message, expectedAsBAOS.toByteArray(), actualAsBAOS.toByteArray());
+	}
+	
+	protected static void assertDateEquals(String message, long expected, long actual) {
+		if(expected != actual) {
+			long d = expected - actual;
+			long dSeconds = (d / 1000) % 60;
+			long dMinutes = (d / (1000 * 60)) % 60;
+			long dHours = (d / (1000 * 60 * 60)) % 60;
+			long dDays = (d / (1000 * 60 * 60 * 24)) % 24;
+			long dYears = (d / (1000 * 60 * 60 * 24 * 365));
+			fail("Expected: " + DATE_FORMAT.format(expected) + " ("+expected+");\n" +
+					"Actual: " + DATE_FORMAT.format(actual) + " ("+actual+");\n" +
+					"Times differed by ~"+dYears+"y " +
+					dDays+"d " +
+					dHours+"h " +
+					dMinutes+"m " +
+					dSeconds+"s");
+			fail("Time decode was incorrect.");
+		}
 	}
 
 	protected static void assertEqualsHashcodeTrue(Object a, Object b) {
