@@ -5,22 +5,32 @@
 	<name>FrontlineSMS Test Library</name>
 	<version>0.01.02-SNAPSHOT</version>
 	<description>Shared test classes for FrontlineSMS and related projects.</description>
-	<parent>
-		<groupId>net.frontlinesms.core</groupId>
-		<artifactId>frontlinesms-pom-parent</artifactId>
-		<version>1.7.00-beta-6-SNAPSHOT</version>
-		<relativePath>../pom-parent</relativePath>
-	</parent>
+  
+  	<properties>
+		<!-- Force Maven to use UTF-8 encoding when copying resources, rather than using the 
+			platform default. -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+  		<spring.version>2.5.6</spring.version>
+  	</properties>
+  	
+	<build>	
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
   
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -35,6 +45,7 @@
 		<dependency>
 			<groupId>net.frontlinesms.core</groupId>
 			<artifactId>smslib</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
