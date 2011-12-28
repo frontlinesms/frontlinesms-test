@@ -1,37 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.frontlinesms.core</groupId>
+	<groupId>net.frontlinesms.test</groupId>
 	<artifactId>frontlinesms-test</artifactId>
 	<name>FrontlineSMS Test Library</name>
 	<version>0.01.02-SNAPSHOT</version>
 	<description>Shared test classes for FrontlineSMS and related projects.</description>
-  
-  	<properties>
-		<!-- Force Maven to use UTF-8 encoding when copying resources, rather than using the 
-			platform default. -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-  		<spring.version>2.5.6</spring.version>
-  	</properties>
-  	
-	<build>	
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<parent>
+		<groupId>net.frontlinesms.core</groupId>
+		<artifactId>frontlinesms-pom-parent</artifactId>
+		<version>1.7.0-beta-7-SNAPSHOT</version>
+		<relativePath>../pom-parent</relativePath>
+	</parent>
   
 	<dependencies>
 		<dependency>
 			<!-- Requires fix found at http://www.slingingsemicolons.com/blogs/dave/maven-and-log4j -->
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
