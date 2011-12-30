@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.mockito.MockitoAnnotations;
@@ -58,7 +60,7 @@ public abstract class BaseTestCase extends TestCase {
 		fail("TODO: " + message);
 	}
 	
-//> INJECTION METHODS
+//> SETUP METHODS
 	protected void inject(Object object, String fieldName, Object value) {
 		try {
 			Field f = object.getClass().getDeclaredField(fieldName);
@@ -67,6 +69,10 @@ public abstract class BaseTestCase extends TestCase {
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	protected static <T> List<T> emptyList(Class<T> c) {
+		return Collections.emptyList();
 	}
 	
 //> EQUALS METHODS
