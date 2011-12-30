@@ -49,6 +49,13 @@ public abstract class BaseTestCase extends TestCase {
 		TEMPORARY_DATA_DIRECTORY.delete();
 	}
 	
+//> COMMENT METHODS
+	public static void TODO(String message) {
+		// In future we may want the option to disable failure for calls to this
+		// method and e.g. replace them with warnings in the logs.
+		fail("TODO: " + message);
+	}
+	
 //> INJECTION METHODS
 	protected void inject(Object object, String fieldName, Object value) {
 		try {
