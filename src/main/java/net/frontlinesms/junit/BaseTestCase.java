@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.mockito.MockitoAnnotations;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.ComparisonFailure;
@@ -39,6 +40,7 @@ public abstract class BaseTestCase extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		MockitoAnnotations.initMocks(this);
 		TEMPORARY_DATA_DIRECTORY.mkdir();
 	}
 	
