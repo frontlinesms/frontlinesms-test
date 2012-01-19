@@ -81,7 +81,16 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected static void assertEquals(byte[] expected, byte[] actual) {
+	public static void assertEquals(byte[] expected, byte[] actual) {
+		assertEqualsWithoutMessage();
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>long[]</code>.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(long[] expected, long[] actual) {
 		assertEqualsWithoutMessage();
 	}
 	
@@ -91,7 +100,20 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected static void assertEquals(String message, byte[] expected, byte[] actual) {
+	public static void assertEquals(String message, byte[] expected, byte[] actual) {
+		assertEquals(message + " (different lengths)", expected.length, actual.length);
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
+		}
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>long[]</code>.
+	 * @param message The message to display if the two arrays are not equal in length and content.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String message, long[] expected, long[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
@@ -104,7 +126,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
-	protected static void assertEquals(String message, Object[] expected, Object[] actual) {
+	public static void assertEquals(String message, Object[] expected, Object[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
@@ -137,7 +159,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected
 	 * @param actual
 	 */
-	protected static void assertEquals(String message, Date expected, Date actual) {
+	public static void assertEquals(String message, Date expected, Date actual) {
 		assertEquals(message, expected.getTime(), actual.getTime());	
 	}
 	
@@ -146,7 +168,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected Stream of expected values
 	 * @param actual Stream of actual values
 	 */
-	protected static void assertEquals(InputStream expected, InputStream actual) {
+	public static void assertEquals(InputStream expected, InputStream actual) {
 		assertEqualsWithoutMessage();
 	}
 	
@@ -156,7 +178,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected Stream of expected values
 	 * @param actual Stream of actual values
 	 */
-	protected static void assertEquals(String message, InputStream expected, InputStream actual) {
+	public static void assertEquals(String message, InputStream expected, InputStream actual) {
 		ByteArrayOutputStream expectedAsBAOS = new ByteArrayOutputStream();
 		stream2stream(expected, expectedAsBAOS);
 
@@ -185,7 +207,7 @@ public abstract class BaseTestCase extends TestCase {
 		}
 	}
 
-	protected static void assertEqualsHashcodeTrue(Object a, Object b) {
+	public static void assertEqualsHashcodeTrue(Object a, Object b) {
 		assert(a != null) : "You must provide at least one non-null object to this method.";
 		assertTrue(a.equals(b));
 		if(b != null) {
@@ -194,7 +216,7 @@ public abstract class BaseTestCase extends TestCase {
 		}
 	}
 	
-	protected static void assertEqualsHashcodeFalse(Object a, Object b) {
+	public static void assertEqualsHashcodeFalse(Object a, Object b) {
 		assert(a != null) : "You must provide at least one non-null object to this method.";
 		assertFalse(a.equals(b));
 		if(b != null) {
