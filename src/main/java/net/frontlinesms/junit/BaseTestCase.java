@@ -95,6 +95,15 @@ public abstract class BaseTestCase extends TestCase {
 	}
 	
 	/**
+	 * Compare the contents of 2 <code>String[]</code>.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String[] expected, String[] actual) {
+		assertEqualsWithoutMessage();
+	}
+	
+	/**
 	 * Compare the contents of 2 <code>byte[]</code>.
 	 * @param message The message to display if the two arrays are not equal in length and content.
 	 * @param expected The expexted array.
@@ -114,6 +123,19 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param actual The actual array found in the test.
 	 */
 	public static void assertEquals(String message, long[] expected, long[] actual) {
+		assertEquals(message + " (different lengths)", expected.length, actual.length);
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
+		}
+	}
+
+	/**
+	 * Compare the contents of 2 <code>String[]</code>.
+	 * @param message The message to display if the two arrays are not equal in length and content.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String message, String[] expected, String[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
