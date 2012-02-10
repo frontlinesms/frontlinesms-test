@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +63,7 @@ public abstract class BaseTestCase extends TestCase {
 	}
 	
 //> SETUP METHODS
-	protected void inject(Object object, String fieldName, Object value) {
+	public static void inject(Object object, String fieldName, Object value) {
 		try {
 			Field f = object.getClass().getDeclaredField(fieldName);
 			f.setAccessible(true);
@@ -71,8 +73,16 @@ public abstract class BaseTestCase extends TestCase {
 		}
 	}
 	
-	protected static <T> List<T> emptyList(Class<T> c) {
+	public static <T> List<T> emptyList(Class<T> c) {
 		return Collections.emptyList();
+	}
+	
+	public static <T> T[] array(T... ts) {
+		return ts;
+	}
+	
+	public static <T> List<T> asList(T... ts) {
+		return new ArrayList<T>(Arrays.asList(ts));
 	}
 	
 //> EQUALS METHODS
@@ -162,7 +172,7 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected
 	 * @param actual
 	 */
-	protected static void myAssertEquals(String message, String expected, String actual) {
+	public static void assertStringEquals(String message, String expected, String actual) {
 		try {
 			assertEquals(message, expected, actual);
 		} catch(AssertionFailedError f) {
@@ -210,7 +220,7 @@ public abstract class BaseTestCase extends TestCase {
 		assertEquals(message, expectedAsBAOS.toByteArray(), actualAsBAOS.toByteArray());
 	}
 	
-	protected static void assertDateEquals(String message, long expected, long actual) {
+	public static void assertDateEquals(String message, long expected, long actual) {
 		if(expected != actual) {
 			long d = expected - actual;
 			long dSeconds = (d / 1000) % 60;
@@ -247,7 +257,7 @@ public abstract class BaseTestCase extends TestCase {
 		}
 	}
 	
-	protected static void assertInstanceOf(String message, Class<?> c, Object o) {
+	public static void assertInstanceOf(String message, Class<?> c, Object o) {
 		if(o == null) {
 			fail(message + "\r\nExpected " + c + " but object was null.");
 		}
