@@ -100,7 +100,34 @@ public abstract class BaseTestCase extends TestCase {
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
+	public static void assertEquals(int[] expected, int[] actual) {
+		assertEqualsWithoutMessage();
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>long[]</code>.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(Integer[] expected, Integer[] actual) {
+		assertEqualsWithoutMessage();
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>long[]</code>.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
 	public static void assertEquals(long[] expected, long[] actual) {
+		assertEqualsWithoutMessage();
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>long[]</code>.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(Long[] expected, Long[] actual) {
 		assertEqualsWithoutMessage();
 	}
 	
@@ -127,12 +154,51 @@ public abstract class BaseTestCase extends TestCase {
 	}
 	
 	/**
+	 * Compare the contents of 2 <code>int[]</code>.
+	 * @param message The message to display if the two arrays are not equal in length and content.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String message, int[] expected, int[] actual) {
+		assertEquals(message + " (different lengths)", expected.length, actual.length);
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
+		}
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>Integer[]</code>.
+	 * @param message The message to display if the two arrays are not equal in length and content.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String message, Integer[] expected, Integer[] actual) {
+		assertEquals(message + " (different lengths)", expected.length, actual.length);
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
+		}
+	}
+	
+	/**
 	 * Compare the contents of 2 <code>long[]</code>.
 	 * @param message The message to display if the two arrays are not equal in length and content.
 	 * @param expected The expexted array.
 	 * @param actual The actual array found in the test.
 	 */
 	public static void assertEquals(String message, long[] expected, long[] actual) {
+		assertEquals(message + " (different lengths)", expected.length, actual.length);
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
+		}
+	}
+	
+	/**
+	 * Compare the contents of 2 <code>Integer[]</code>.
+	 * @param message The message to display if the two arrays are not equal in length and content.
+	 * @param expected The expexted array.
+	 * @param actual The actual array found in the test.
+	 */
+	public static void assertEquals(String message, Long[] expected, Long[] actual) {
 		assertEquals(message + " (different lengths)", expected.length, actual.length);
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(message + "(error found at position " + i + ")", expected[i], actual[i]);
