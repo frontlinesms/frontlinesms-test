@@ -77,6 +77,10 @@ public abstract class BaseTestCase extends TestCase {
 		return Collections.emptyList();
 	}
 	
+	public static int[] array(int... ts) {
+		return ts;
+	}
+	
 	public static <T> T[] array(T... ts) {
 		return ts;
 	}
