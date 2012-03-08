@@ -3,7 +3,7 @@
 	<groupId>net.frontlinesms.test</groupId>
 	<artifactId>frontlinesms-test</artifactId>
 	<name>FrontlineSMS Test Library</name>
-	<version>0.1.3</version>
+	<version>0.1.4-SNAPSHOT</version>
 	<description>Shared test classes for FrontlineSMS and related projects.</description>
 	<licenses>
 		<license>
