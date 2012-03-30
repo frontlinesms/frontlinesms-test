@@ -85,6 +85,10 @@ public abstract class BaseTestCase extends TestCase {
 		return ts;
 	}
 	
+	public static <T> T[] objectArray(T... ts) {
+		return array(ts);
+	}
+	
 	public static <T> List<T> asList(T... ts) {
 		return new ArrayList<T>(Arrays.asList(ts));
 	}
@@ -337,6 +341,11 @@ public abstract class BaseTestCase extends TestCase {
 	}
 	
 //> STATIC UTILITIES
+	/** print to the standard out */
+	public static void println(String s) {
+		System.out.println(s);
+	}
+	
 	/**
 	 * Creates a test output file in the temp test directory.
 	 * @param fileName The name of the test output file.
