@@ -56,10 +56,22 @@ public abstract class BaseTestCase extends TestCase {
 	}
 	
 //> COMMENT METHODS
+	public static void TODO() {
+		TODO("Implement this test.");
+	}
+	
 	public static void TODO(String message) {
 		// In future we may want the option to disable failure for calls to this
 		// method and e.g. replace them with warnings in the logs.
 		fail("TODO: " + message);
+	}
+	
+	public static void pass() {
+		throw new IllegalStateException("pass() should not be called without an explanation message.");
+	}
+	
+	public static void pass(String message) {
+		assertTrue(message, true);
 	}
 	
 //> SETUP METHODS
